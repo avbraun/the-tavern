@@ -1,16 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const {email} = props
-
+  const {email, campaigns} = props
+console.log('campaigns: ', campaigns)
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {email}. Would you like to join a campaign?</h3>
+      {
+        campaigns.map(campaign =>
+          <div id={`div-${campaign.id}`}>
+          <Link
+            key={campaign.id}
+            to={`/campaigns/${campaign.id}`}>
+          {campaign.name}
+          </Link>
+          </div>)
+        }
     </div>
   )
 }
@@ -20,15 +31,10 @@ export const UserHome = (props) => {
  */
 const mapState = (state) => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    campaigns: state.campaigns
   }
 }
 
-export default connect(mapState)(UserHome)
 
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+export default connect(mapState)(UserHome)

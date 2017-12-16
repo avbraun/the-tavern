@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "the-tavern",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "A DND campaign management tool",
   "engines": {
     "node": ">= 7.0.0"
   },
