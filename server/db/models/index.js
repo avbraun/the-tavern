@@ -9,8 +9,23 @@ const Character = require('./character')
  *    BlogPost.belongsTo(User)
  */
 
-Campaign.belongsToMany(User, {through: 'campaign_players'});
-User.belongsToMany(Character, {through: 'user_characters'});
+// Campaign.belongsToMany(User, {through: 'campaign_players'});
+// User.belongsToMany(Character, {through: 'user_characters'});
+
+// User.hasMany(Character)
+// // User.hasMany(Campaign)
+// // Campaign.hasMany(User)
+// Character.belongsTo(User)
+// Character.belongsTo(Campaign)
+// Campaign.hasMany(Character)
+
+User.hasMany(Character)
+User.belongsToMany(Campaign, {through: 'campaign_users'})
+Campaign.belongsToMany(User, {through: 'campaign_users'})
+Character.belongsTo(User)
+Character.belongsTo(Campaign)
+Campaign.hasMany(Character)
+
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

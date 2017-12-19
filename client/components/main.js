@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {withRouter, Link } from 'react-router-dom'
-import {logout, fetchCampaigns} from '../store'
+import {withRouter, Link, NavLink } from 'react-router-dom'
+import {logout, fetchCampaigns, fetchUsers, fetchCharacters} from '../store'
 
 /**
  * COMPONENT
@@ -11,7 +11,7 @@ import {logout, fetchCampaigns} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, getCampaigns} = props
+  const {children, handleClick, isLoggedIn, getCampaignsUsersAndChars, currentUser} = props
 
   return (
     <div>
@@ -21,8 +21,11 @@ const Main = (props) => {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home" onClick={getCampaigns}>Home</Link>
+              <NavLink to="/" onClick={getCampaignsUsersAndChars}>Home</NavLink>
               <a href="#" onClick={handleClick}>Logout</a>
+              <NavLink to={`/users/${currentUser.id}`}>My Profile</NavLink>
+              <NavLink to="/users/all">All Users</NavLink>
+              <NavLink to={`/campaigns/user/${currentUser.id}`}>My Campaigns</NavLink>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
@@ -42,7 +45,8 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    currentUser: state.user
   }
 }
 
@@ -51,8 +55,10 @@ const mapDispatch = (dispatch) => {
     handleClick () {
       dispatch(logout())
     },
-    getCampaigns () {
+    getCampaignsUsersAndChars () {
       dispatch(fetchCampaigns())
+      dispatch(fetchUsers())
+      dispatch(fetchCharacters())
     }
   }
 }

@@ -1,27 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const {email, campaigns} = props
-console.log('campaigns: ', campaigns)
+  const {user, campaigns} = props
   return (
     <div>
-      <h3>Welcome, {email}. Would you like to join a campaign?</h3>
-      {
-        campaigns.map(campaign =>
-          <div id={`div-${campaign.id}`}>
-          <Link
-            key={campaign.id}
-            to={`/campaigns/${campaign.id}`}>
-          {campaign.name}
-          </Link>
-          </div>)
-        }
+      <h3>Welcome, {user.fullName || user.email}. What would you like to do today?</h3>
+      <NavLink to={`/campaigns/user/${user.id}`}>Continue a campaign</NavLink><br />
+      <NavLink to="/campaigns">Join a new campaign</NavLink><br />
+      <NavLink to="/campaigns/new">Start your own campaign</NavLink><br />
+      <NavLink to="/characters/new">Create a character</NavLink><br />
     </div>
   )
 }
@@ -31,8 +24,8 @@ console.log('campaigns: ', campaigns)
  */
 const mapState = (state) => {
   return {
-    email: state.user.email,
-    campaigns: state.campaigns
+    campaigns: state.campaigns,
+    user: state.user
   }
 }
 
