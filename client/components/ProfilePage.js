@@ -1,25 +1,44 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 
 const ProfilePage = (props) => {
-  const { user } = props
+  const { user, characters } = props
 
   return (
     <div>
-    This is a profile page! {user.fullName}
+    This is a profile page!<br />
+    Name: {user.fullName}<br />
+    Email: {user.email}<br />
+    Bio: {user.bio}<br />
+    Proudest DnD Moment: {user.proudestMoment}<br />
+    Campaigns:
+    {
+      characters.map(character =>
+        <div>
+        <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link> as {character.name} ({character.species}, {character.alignment})<br />
+        </div>
+      )
+    }
+    <br />
+    <br />
     </div>
   )
 }
 
 
 const mapState = (state, ownProps) => {
-  const userId = Number(ownProps.match.params.userId)
-
   return {
-    // campaign: state.campaigns.find(campaign => campaign.id === campaignId),
-    user: state.user
+    user: state.user,
+    allUsers: state.allUsers,
+    characters: state.characters.filter(character => character.userId === state.user.id && character.campaignId)
   }
 }
 
-export default withRouter(connect(mapState)(ProfilePage))
+const mapDispatch = (dispatch) => {
+  return {
+
+  }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(ProfilePage))

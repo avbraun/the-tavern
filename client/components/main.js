@@ -15,17 +15,18 @@ const Main = (props) => {
 
   return (
     <div>
-      <h1>THE TAVERN</h1>
+    <h1>The Tavern</h1>
       <nav>
         {
           isLoggedIn
-            ? <div>
+            ? <div className="nav-bar">
               {/* The navbar will show these links after you log in */}
-              <NavLink to="/" onClick={getCampaignsUsersAndChars}>Home</NavLink>
-              <a href="#" onClick={handleClick}>Logout</a>
-              <NavLink to={`/users/${currentUser.id}`}>My Profile</NavLink>
-              <NavLink to="/users/all">All Users</NavLink>
-              <NavLink to={`/campaigns/user/${currentUser.id}`}>My Campaigns</NavLink>
+              <NavLink className="home" to="/" onClick={getCampaignsUsersAndChars}>Home</NavLink>
+              <NavLink className="my-campaigns" to={`/campaigns/user/${currentUser.id}`}>My Campaigns</NavLink>
+              <NavLink className="my-profile" to={`/users/${currentUser.id}`}>My Profile</NavLink>
+              <NavLink className="users" to="/users/all">Users</NavLink>
+              <NavLink className="characters" to="/characters/all">Characters</NavLink>
+              <a href="#" className="logout" onClick={handleClick}>Logout</a>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
@@ -34,7 +35,6 @@ const Main = (props) => {
             </div>
         }
       </nav>
-      <hr />
       {children}
     </div>
   )
