@@ -2,40 +2,54 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-// class AllCharacters extends React.Component {
-export const AllCampaigns = (props) => {
-  const { campaigns } = props
+class AllCampaigns extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      search: ''
+    }
+    this.updateSearch = this.updateSearch.bind(this)
+  }
 
-  return (
-    <div>
-      <h3>Explore Campaigns</h3>
-      <br />
-      Advanced Search:
-      <form>
-      <input type="text" name="Search" />
-      <input type="submit" value="Submit" />
-      </form>
-      <br />
-      <br />
-      {
-        campaigns.map(campaign =>
-          <div>
-          Name: <Link to={`/campaigns/${campaign.id}`}>{campaign.name}</Link><br />
-          DM: {campaign.dm} <br />
-          Description: {campaign.description}<br />
-          Players:
-          <ul>
-          {
-            campaign.users.map(user =>
-                <li>{user.fullName}</li>
-            )
+  updateSearch(event) {
+    this.setState({ search: event.target.value })
+  }
+
+  render() {
+    let filteredCampaigns = this.props.campaigns.filter(campaign => {
+      return campaign.name.indexOf(this.state.search) !== -1;
+    });
+    return (
+      <div>
+        <h3>Explore Campaigns</h3>
+        Search by name:
+        <input
+          type="text"
+          value={this.state.search}
+          onChange={this.updateSearch}
+          name="Search" />
+        <br />
+        <br />
+        {
+          filteredCampaigns.map(campaign =>
+            <div>
+            Name: <Link to={`/campaigns/${campaign.id}`}>{campaign.name}</Link><br />
+            DM: {campaign.dm} <br />
+            Description: {campaign.description}<br />
+            Players:
+            <ul>
+            {
+              campaign.users.map(user =>
+                  <li>{user.fullName}</li>
+              )
+            }
+            </ul>
+            <br />
+            </div>)
           }
-          </ul>
-          <br />
-          </div>)
-        }
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
 const mapState = (state) => {

@@ -2,42 +2,56 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-// class AllCharacters extends React.Component {
-export const AllCharacters = (props) => {
-  const {user, characters} = props
+class AllCharacters extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      search: ''
+    }
+    this.updateSearch = this.updateSearch.bind(this)
+  }
 
-  return (
-    <div>
-      <h3>Explore Characters</h3>
-      <br />
-      Advanced Search:
-      <form>
-      <input type="text" name="Search" />
-      <input type="submit" value="Submit" />
-      </form>
-      <br />
-      <br />
-      {
-        characters.map(character =>
-          <div>
-          Name: {character.name}<br />
-          Species: {character.species}<br />
-          Alignment: {character.alignment}<br />
-          Description: {character.description}<br />
-          {
-            character.campaign ?
+  updateSearch(event) {
+    this.setState({ search: event.target.value })
+  }
+
+  render () {
+    let filteredCharacters = this.props.characters.filter(character => {
+      return character.name.indexOf(this.state.search) !== -1;
+    });
+    return (
+      <div>
+        <h3>Explore Characters</h3>
+        Search by name:
+        <input
+          type="text"
+          value={this.state.search}
+          onChange={this.updateSearch}
+          name="Search" />
+        <br />
+        <br />
+        {
+          filteredCharacters.map(character =>
             <div>
-            Current Campaign: <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link>
-            </div> :
-            <div>
-            Current Campaign: n/a
-            </div>
+            Name: {character.name}<br />
+            Species: {character.species}<br />
+            Alignment: {character.alignment}<br />
+            Description: {character.description}<br />
+            {
+              character.campaign ?
+              <div>
+              Current Campaign: <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link>
+              </div> :
+              <div>
+              Current Campaign: n/a
+              </div>
+            }
+            <br />
+            </div>)
           }
-          <br />
-          </div>)
-        }
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
 const mapState = (state) => {
