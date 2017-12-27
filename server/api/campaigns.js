@@ -27,3 +27,16 @@ router.post('/new', (req, res, next) => {
       res.json(newCampaign))
     .catch(next)
 })
+
+// // Add user to campaign
+// router.put('/update', (req, res, next) => {
+//   let campaignId = Number(req.body.campaignId)
+//   Campaign.findOne({
+//     where: { id: campaignId }
+//   })
+//     .then(foundCampaign =>
+//       foundCampaign.update({
+//         userId:
+//       })
+//     )
+// })

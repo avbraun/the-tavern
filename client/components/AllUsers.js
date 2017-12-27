@@ -7,7 +7,8 @@ export const AllUsers = (props) => {
 
   return (
     <div>
-      <h3>Meet the community!</h3>
+      <img src="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/03_NEW-TO-DnD_Races_Heroes_Hero_140725.jpg?itok=Lv71J5AL" />
+      <h2>Meet the Community</h2>
       {
         allUsers.map(singleUser =>
           <div>

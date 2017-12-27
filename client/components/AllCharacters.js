@@ -2,12 +2,21 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
+// class AllCharacters extends React.Component {
 export const AllCharacters = (props) => {
   const {user, characters} = props
 
   return (
     <div>
-      <h3>Explore characters!</h3>
+      <h3>Explore Characters</h3>
+      <br />
+      Advanced Search:
+      <form>
+      <input type="text" name="Search" />
+      <input type="submit" value="Submit" />
+      </form>
+      <br />
+      <br />
       {
         characters.map(character =>
           <div>
@@ -39,3 +48,4 @@ const mapState = (state) => {
 
 
 export default connect(mapState)(AllCharacters)
+

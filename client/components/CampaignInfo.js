@@ -4,7 +4,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {updateCharacter, updateCampaign} from '../store'
 import history from '../history'
 
-class Campaign extends React.Component {
+class CampaignInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +24,7 @@ class Campaign extends React.Component {
     <br />
     <br />
       This is the primary page of a campaign!
-      <br />
+      {/*<br />
       <h2>{campaign.name}</h2>
       Version: {campaign.version}
       <br />
@@ -76,7 +76,7 @@ class Campaign extends React.Component {
             <option value={character.id}>{character.name} ({character.species}, {character.alignment})</option>)
         }
       </select>
-      <button onClick={event => joinCampaign(event, campaign, user)}>Join</button>
+      <button onClick={event => joinCampaign(event, campaign, user)}>Join</button>*/}
     </div>
     )
   }
@@ -123,4 +123,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapState, mapDispatch)(Campaign))
+export default withRouter(connect(mapState, mapDispatch)(CampaignInfo))

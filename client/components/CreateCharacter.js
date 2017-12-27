@@ -70,12 +70,11 @@ class CreateCharacter extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     this.props.createCharacter(this.state)
-    // history.push('/characters/all')
+    history.push('/characters/all')
   }
 }
 
-const mapState = (state, ownProps) => {
-  // const campaignId = Number(ownProps.match.params.campaignId)
+const mapState = (state) => {
   return {
     user: state.user
   }
@@ -84,6 +83,7 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch) => {
   return {
     createCharacter (character) {
+      console.log('character-dispatch: ', character)
       dispatch(postCharacter(character))
     }
   }

@@ -76,16 +76,16 @@ class CreateCampaign extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     this.props.createCampaign(this.state)
-    history.push('/campaigns')
+    history.push('/campaigns/all')
   }
 }
 
 const mapState = (state, ownProps) => {
-  const campaignId = Number(ownProps.match.params.campaignId)
+  // const campaignId = Number(ownProps.match.params.campaignId)
 
   return {
-    campaign: state.campaigns.find(campaign => campaign.id === campaignId),
-    characters: state.characters.filter(character => character.campaignId === campaignId)
+  //   campaign: state.campaigns.find(campaign => campaign.id === campaignId),
+  //   characters: state.characters.filter(character => character.campaignId === campaignId)
   }
 }
 

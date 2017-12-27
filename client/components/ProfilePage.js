@@ -3,15 +3,18 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 
 const ProfilePage = (props) => {
-  const { user, characters } = props
-
+  const { profileUser, characters } = props
   return (
     <div>
-    This is a profile page!<br />
-    Name: {user.fullName}<br />
-    Email: {user.email}<br />
-    Bio: {user.bio}<br />
-    Proudest DnD Moment: {user.proudestMoment}<br />
+    {
+      profileUser.id === props.match.params.userId ?
+      <h3>My Profile</h3> :
+      <h3>User Profile</h3>
+    }
+    Name: {profileUser.fullName}<br />
+    Email: {profileUser.email}<br />
+    Bio: {profileUser.bio}<br />
+    Proudest DnD Moment: {profileUser.proudestMoment}<br />
     Campaigns:
     {
       characters.map(character =>
@@ -28,17 +31,13 @@ const ProfilePage = (props) => {
 
 
 const mapState = (state, ownProps) => {
+let id = Number(ownProps.id || ownProps.match.params.userId);
+console.log('id: ', id)
+
   return {
-    user: state.user,
-    allUsers: state.allUsers,
-    characters: state.characters.filter(character => character.userId === state.user.id && character.campaignId)
+    profileUser: state.allUsers.find(user => user.id === id),
+    characters: state.characters.filter(character => character.userId === id && character.campaignId)
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-
-  }
-}
-
-export default withRouter(connect(mapState, mapDispatch)(ProfilePage))
+export default withRouter(connect(mapState)(ProfilePage))

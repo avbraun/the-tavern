@@ -12,7 +12,7 @@ export const UserCampaigns = (props) => {
   // console.log('usercharacters: ', userCharacters)
   return (
     <div>
-      <h3>My campaigns:</h3>
+      <h3>My Campaigns</h3>
       {
         userCharacters.length ?
           userCharacters.map(filteredCharacter =>
@@ -28,6 +28,7 @@ export const UserCampaigns = (props) => {
         }
     <br />
     Eager for more adventure? Join a campaign or create one of your own!
+    <br />
     <br />
     <button onClick={createCampaign}>Create Campaign</button>
     <button onClick={joinCampaign}>Join Campaign</button>
