@@ -7,6 +7,7 @@ const ProfilePage = (props) => {
   const profileId = Number(props.match.params.userId)
   return (
     <div>
+    <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/Article_SwordCoastAdventurerersGuide_Sub-Header.jpg?itok=i-IayJIi" />
     {
       profileId === user.id ?
       <h3>My Profile</h3> :

@@ -9,9 +9,9 @@ import history from '../history'
  */
 export const UserCampaigns = (props) => {
   const { userCharacters, user, createCampaign, joinCampaign } = props
-  // console.log('usercharacters: ', userCharacters)
   return (
     <div>
+      <img src="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/07_NewtoDnD_Hero_Locations.jpg?itok=SxzyekpZ" />
       <h3>My Campaigns</h3>
       {
         userCharacters.length ?
