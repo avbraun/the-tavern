@@ -22,3 +22,18 @@ router.get('/all', (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 })
+
+// Update current user
+router.put('/update', (req, res, next) => {
+  let userId = Number(req.body.id)
+  User.findOne({
+    where: { id: userId }
+  })
+    .then(foundUser =>
+      foundUser.update(req.body))
+    .then(updatedUser => {
+      res.json(updatedUser)
+    }
+    )
+    .catch(next)
+})
