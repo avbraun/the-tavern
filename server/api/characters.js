@@ -32,8 +32,8 @@ router.put('/update', (req, res, next) => {
     .then(foundCharacter =>
       foundCharacter.update({
         id: characterId,
-        userId: req.body.userId,
-        campaignId: req.body.campaignId
+        userId: Number(req.body.userId),
+        campaignId: Number(req.body.campaignId)
       })
     )
     .then(updatedCharacter => {

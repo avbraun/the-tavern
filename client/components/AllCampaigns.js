@@ -23,7 +23,7 @@ class AllCampaigns extends React.Component {
       <div>
         <img src="http://dnd.wizards.com/sites/default/files/media/styles/news_banner_header/public/default_images/_Header_Article_Template.jpg?itok=0V79tvNJ" />
         <h3>Explore Campaigns</h3>
-        Search by name:
+        Search:
         <input
           type="text"
           value={this.state.search}
@@ -37,14 +37,6 @@ class AllCampaigns extends React.Component {
             Name: <Link to={`/campaigns/${campaign.id}`}>{campaign.name}</Link><br />
             DM: {campaign.dm} <br />
             Description: {campaign.description}<br />
-            Players:
-            <ul>
-            {
-              campaign.users.map(user =>
-                  <li>{user.fullName}</li>
-              )
-            }
-            </ul>
             <br />
             </div>)
           }

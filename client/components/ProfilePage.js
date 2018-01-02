@@ -11,19 +11,19 @@ const ProfilePage = (props) => {
     {
       profileId === user.id ?
       <h3>My Profile</h3> :
-      <h3>User Profile: {profileUser.fullName}</h3>
+      <h3>User Profile: {profileUser.fullName || profileUser.email}</h3>
     }
     NAME<br />
-    {profileUser.fullName}<br />
+    {profileUser.fullName || ''}<br />
     <br />
     EMAIL<br />
-    {profileUser.email}<br />
+    {profileUser.email || ''}<br />
     <br />
     BIO<br />
-    {profileUser.bio}<br />
+    {profileUser.bio || ''}<br />
     <br />
     PROUDEST DND MOMENT<br />
-    {profileUser.proudestMoment}<br />
+    {profileUser.proudestMoment || ''}<br />
     <br />
     CAMPAIGNS
     <ul>

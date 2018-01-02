@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USERS = 'GET_USERS'
 const EDIT_USER = 'EDIT_USER'
+const ADD_CHARACTER = 'ADD_CHARACTER'
 
 /**
  * INITIAL STATE
@@ -17,6 +18,7 @@ const allUsers = {}
  */
 const getUsers = users => ({ type: GET_USERS, users })
 const editUser = user => ({ type: EDIT_USER, user })
+// const addCharacter = (character, user) =({})
 
 /**
  * THUNK CREATORS
@@ -47,6 +49,8 @@ export default function (state = allUsers, action) {
       let userIndex = state.findIndex(user => user.id === action.user.id);
       newState[userIndex] = action.user;
       return newState;
+    case ADD_CHARACTER:
+
     default:
       return state
   }

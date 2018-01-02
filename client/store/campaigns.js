@@ -36,7 +36,7 @@ export const postCampaign = campaign =>
 
 export const updateCampaign = campaign =>
   dispatch =>
-    axios.put('/api/campaigns/update', updateObj)
+    axios.put('/api/campaigns/update', campaign)
       .then(res => {
         dispatch(editCampaign(res.data))
       })
@@ -52,7 +52,10 @@ export default function (state = [], action) {
     case ADD_CAMPAIGN:
       return [...state, action.campaign]
     case EDIT_CAMPAIGN:
-
+      // let newState = [...state];
+      // let campaignIn = state.findIndex(user => user.id === action.user.id);
+      // newState[userIndex] = action.user;
+      // return newState;
     default:
       return state
   }

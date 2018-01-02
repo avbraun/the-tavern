@@ -21,7 +21,6 @@ export const UserCampaigns = (props) => {
            {filteredCharacter.campaign.name}</Link>   ({filteredCharacter.name} the {filteredCharacter.species}, {filteredCharacter.alignment})
           </div>
         )
-        // <div>Eager for more adventure? Join or create another campaign!</div>
         : <div>
         You are not currently on any campaigns.
         </div>
@@ -53,7 +52,7 @@ const mapDispatch = (dispatch) => {
       history.push('/campaigns/new')
     },
     joinCampaign () {
-      history.push('/campaigns')
+      history.push('/campaigns/all')
     }
   }
 }

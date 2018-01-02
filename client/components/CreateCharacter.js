@@ -20,9 +20,8 @@ class CreateCharacter extends React.Component {
   render () {
     return (
       <div>
-      Create a new character!
-      <br />
-      <br />
+      <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/hero_dmgscreen_0.jpg?itok=Iy7FLffb" />
+      <h2>Create a New Character</h2>
       <form onSubmit={this.handleSubmit} onChange={this.handleUpdate}>
         <label>
           Name:

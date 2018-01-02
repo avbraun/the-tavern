@@ -32,6 +32,9 @@ class AllCharacters extends React.Component {
       <div>
         <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/hero_dmgscreen_0.jpg?itok=Iy7FLffb" />
         <h3>Explore Characters</h3>
+        <button><Link to="/characters/new">Create Your Own</Link></button>
+        <br />
+        <br />
         Search:
         <input
           type="text"

@@ -4,14 +4,16 @@ import {connect} from 'react-redux'
 import {withRouter, Link, NavLink } from 'react-router-dom'
 import {logout, fetchCampaigns, fetchUsers, fetchCharacters} from '../store'
 
-/**
- * COMPONENT
- *  The Main component is our 'picture frame' - it displays the navbar and anything
- *  else common to our entire app. The 'picture' inside the frame is the space
- *  rendered out by the component's `children`.
- */
-const Main = (props) => {
-  const {children, handleClick, isLoggedIn, getCampaignsUsersAndChars, currentUser} = props
+class Main extends React.Component {
+// const Main = (props) => {
+  // const {children, handleClick, isLoggedIn, getCampaignsUsersAndChars, currentUser} = props
+
+  componentDidMount() {
+    this.props.getCampaignsUsersAndChars();
+  }
+
+  render() {
+    const {children, handleClick, isLoggedIn, getCampaignsUsersAndChars, currentUser} = this.props
 
   return (
     <div>
@@ -39,6 +41,7 @@ const Main = (props) => {
       {children}
     </div>
   )
+}
 }
 
 /**
