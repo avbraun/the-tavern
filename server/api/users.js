@@ -33,7 +33,6 @@ router.put('/update', (req, res, next) => {
       foundUser.update(req.body))
     .then(updatedUser => {
       res.json(updatedUser)
-    }
-    )
+    })
     .catch(next)
 })

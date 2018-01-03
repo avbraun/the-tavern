@@ -52,10 +52,10 @@ export default function (state = [], action) {
     case ADD_CAMPAIGN:
       return [...state, action.campaign]
     case EDIT_CAMPAIGN:
-      // let newState = [...state];
-      // let campaignIn = state.findIndex(user => user.id === action.user.id);
-      // newState[userIndex] = action.user;
-      // return newState;
+      let newState = [...state];
+      let campaignIndex = newState.findIndex(singleCampaign => singleCampaign.id === action.campaign.id);
+      newState[campaignIndex] = action.campaign;
+      return newState;
     default:
       return state
   }
