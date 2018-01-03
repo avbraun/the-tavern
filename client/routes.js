@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Campaign, ProfilePage, AllCampaigns, UserCampaigns, CreateCampaign, CreateCharacter, AllUsers, AllCharacters, EditProfile, EditCampaign } from './components'
+import {Main, Login, Signup, UserHome, Campaign, ProfilePage, AllCampaigns, AccountPage, CreateCampaign, CreateCharacter, AllUsers, AllCharacters, EditProfile, EditCampaign } from './components'
 import {me} from './store'
 
 /**
@@ -31,7 +31,7 @@ class Routes extends Component {
                   <Route exact path="/" component={UserHome} />
                   <Route exact path="/home" component={UserHome} />
                   <Route exact path="/campaigns/all" component={AllCampaigns} />
-                  <Route exact path="/campaigns/user/:campaignId" component={UserCampaigns} />
+                  <Route exact path="/account/user/:campaignId" component={AccountPage} />
                   <Route exact path="/campaigns/new" component={CreateCampaign} />
                   <Route exact path="/campaigns/:campaignId" component={Campaign} />
                   <Route exact path="/campaigns/:campaignId/edit" component={EditCampaign} />

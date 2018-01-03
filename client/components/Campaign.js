@@ -22,7 +22,7 @@ class Campaign extends React.Component {
     return (
     <div>
     <img src="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/07_NewtoDnD_Hero_Locations.jpg?itok=SxzyekpZ" />
-      <h2>{campaign.name}</h2>
+      <h3>{campaign.name}</h3>
       Version: {campaign.version}
       <br />
       Type: {campaign.type}
@@ -52,7 +52,7 @@ class Campaign extends React.Component {
         }
       </ul>
       {
-        campaign.users.filter(player => player.id === user.id).length ?
+        campaign.users.filter(player => player.id === user.id).length || campaign.dm === user.fullName ?
           <div /> :
           <div>
             Would you like to join this campaign? Select from one of the characters below, or create your own:

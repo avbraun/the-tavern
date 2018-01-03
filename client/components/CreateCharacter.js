@@ -16,6 +16,7 @@ class CreateCharacter extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
   }
 
   render () {
@@ -23,6 +24,9 @@ class CreateCharacter extends React.Component {
       <div>
       <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/hero_dmgscreen_0.jpg?itok=Iy7FLffb" />
       <h2>Create a New Character</h2>
+      Dream up a character to add to the public database, or save for your own private use!
+      <br />
+      <br />
       <form onSubmit={this.handleSubmit} onChange={this.handleUpdate}>
         <label>
           Name:
@@ -55,8 +59,8 @@ class CreateCharacter extends React.Component {
           <input type="text" name="description" />
         </label>
         <br />
-        <input type="checkbox" name="userId" />
-          Make this character accessible to all players.
+        <input type="checkbox" name="userId" value={this.props.user.id} onClick={this.handleChange} />
+          Save to my personal character list.
         <br />
         <br />
         <input type="submit" value="Submit" />
@@ -73,7 +77,12 @@ class CreateCharacter extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     this.props.createCharacter(this.state)
-    history.push('/characters/all')
+    history.push(`/users/${this.props.user.id}`)
+    // console.log('this.state: ', this.state)
+  }
+
+  handleCheckbox (event) {
+    this.setState({ userId: this.props.user.id })
   }
 }
 

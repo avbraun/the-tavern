@@ -7,12 +7,26 @@ import history from '../history'
 /**
  * COMPONENT
  */
-export const UserCampaigns = (props) => {
-  const { userCharacters, user, createCampaign, joinCampaign } = props
+export const AccountPage = (props) => {
+  const { userCharacters, userDmCampaigns, createCampaign, joinCampaign, savedCharacters } = props
   return (
     <div>
       <img src="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/07_NewtoDnD_Hero_Locations.jpg?itok=SxzyekpZ" />
-      <h3>My Campaigns</h3>
+      <h3>My Account</h3>
+      <h4>Campaigns as Dungeon Master:</h4>
+      {
+        userDmCampaigns.length ?
+          userDmCampaigns.map(campaign =>
+          <div>
+           <Link to={`/campaigns/${campaign.id}`}>
+           {campaign.name}</Link>
+          </div>
+        )
+        : <div>
+        You are not currently leading any campaigns.
+        </div>
+      }
+      <h4>Campaigns as Player:</h4>
       {
         userCharacters.length ?
           userCharacters.map(filteredCharacter =>
@@ -24,7 +38,19 @@ export const UserCampaigns = (props) => {
         : <div>
         You are not currently on any campaigns.
         </div>
-        }
+      }
+      <h4>Saved Characters:</h4>
+      {
+        savedCharacters.length ?
+          savedCharacters.map(filteredCharacter =>
+          <div>
+           {filteredCharacter.name} the {filteredCharacter.species} ({filteredCharacter.alignment})
+          </div>
+        )
+        : <div>
+        You are not currently on any campaigns.
+        </div>
+      }
     <br />
     Eager for more adventure? Join a campaign or create one of your own!
     <br />
@@ -42,7 +68,9 @@ const mapState = (state) => {
   return {
     user: state.user,
     campaigns: state.campaigns,
-    userCharacters: state.characters.filter(character => character.userId === state.user.id && character.campaignId)
+    userCharacters: state.characters.filter(character => character.userId === state.user.id && character.campaignId),
+    userDmCampaigns: state.campaigns.filter(campaign => campaign.dm === state.user.fullName),
+    savedCharacters: state.characters.filter(character => character.userId === state.user.id && !character.campaignId)
   }
 }
 
@@ -57,4 +85,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(UserCampaigns)
+export default connect(mapState, mapDispatch)(AccountPage)

@@ -58,7 +58,7 @@ const mapDispatch = (dispatch) => {
       history.push('/campaigns/all')
     },
     continueCampaign(event, user){
-      history.push(`/campaigns/user/${user.id}`)
+      history.push(`/account/user/${user.id}`)
     }
   }
 }

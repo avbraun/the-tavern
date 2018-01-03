@@ -24,8 +24,6 @@ router.post('/new', (req, res, next) => {
 // Update character
 router.put('/update', (req, res, next) => {
   let characterId = Number(req.body.id)
-  // console.log('type of characterid: ', typeof characterId)
-  // console.log('characterId: ', characterId)
   Character.findOne({
     where: { id: characterId }
   })
