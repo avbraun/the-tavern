@@ -6,7 +6,7 @@ const Character = (props) => {
   const { character, user } = props
   return (
     <div>
-    <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/Article_SwordCoastAdventurerersGuide_Sub-Header.jpg?itok=i-IayJIi" />
+    <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/hero_dmgscreen_0.jpg?itok=Iy7FLffb" />
     <h3>Character Profile: {character.name || 'Unnamed character'}</h3>
     NAME<br />
     {character.name || ''}<br />
@@ -21,7 +21,11 @@ const Character = (props) => {
     {character.description || ''}<br />
     <br />
     CAMPAIGN<br />
-    <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link>
+    {
+      character.campaignId ?
+      <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link> :
+      'N/A'
+    }
     <br />
     <br />
     {

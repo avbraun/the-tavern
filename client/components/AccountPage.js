@@ -44,7 +44,7 @@ export const AccountPage = (props) => {
         savedCharacters.length ?
           savedCharacters.map(filteredCharacter =>
           <div>
-           {filteredCharacter.name} the {filteredCharacter.species} ({filteredCharacter.alignment})
+           <Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.species} ({filteredCharacter.alignment})
           </div>
         )
         : <div>

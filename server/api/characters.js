@@ -21,18 +21,13 @@ router.post('/new', (req, res, next) => {
     .catch(next)
 })
 
-// Update character
 router.put('/update', (req, res, next) => {
   let characterId = Number(req.body.id)
   Character.findOne({
     where: { id: characterId }
   })
     .then(foundCharacter =>
-      foundCharacter.update({
-        id: characterId,
-        userId: Number(req.body.userId),
-        campaignId: Number(req.body.campaignId)
-      })
+      foundCharacter.update(req.body)
     )
     .then(updatedCharacter => {
       console.log('api updated char: ', updatedCharacter)

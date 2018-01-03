@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Campaign, Character, ProfilePage, AllCampaigns, AccountPage, CreateCampaign, CreateCharacter, AllUsers, AllCharacters, EditProfile, EditCampaign } from './components'
+import {Main, Login, Signup, UserHome, Campaign, Character, ProfilePage, AllCampaigns, AccountPage, CreateCampaign, CreateCharacter, AllUsers, AllCharacters, EditProfile, EditCampaign, EditCharacter } from './components'
 import {me} from './store'
 
 /**
@@ -41,6 +41,7 @@ class Routes extends Component {
                   <Route exact path="/characters/new" component={CreateCharacter} />
                   <Route exact path="/characters/all" component={AllCharacters} />
                   <Route exact path="/characters/:characterId" component={Character} />
+                  <Route exact path="/characters/:characterId/edit" component={EditCharacter} />
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}

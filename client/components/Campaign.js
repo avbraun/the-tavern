@@ -8,8 +8,8 @@ class Campaign extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: props.user.id,
-      campaignId: props.match.params.campaignId,
+      userId: Number(props.user.id),
+      campaignId: Number(props.match.params.campaignId),
       id: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,7 +17,7 @@ class Campaign extends React.Component {
   }
 
   render() {
-    const {campaign, campaignCharacters, availableCharacters, userCharacters, joinCampaign, user } = this.props
+    const {campaign, campaignCharacters, availableCharacters, userCharacters, user } = this.props
 
     return (
     <div>
