@@ -58,14 +58,14 @@ class AllCharacters extends React.Component {
         <br />
         <br />
         {
+          filteredCharacters.length ?
           filteredCharacters.map(character =>
             <div>
-            Name: {character.name}<br />
+            Name: <Link to={`/characters/${character.id}`}>{character.name}</Link><br />
             Species: {character.species}<br />
             Alignment: {character.alignment}<br />
-            Description: {character.description}<br />
             {
-              character.campaign ?
+              character.campaignId ?
               <div>
               Current Campaign: <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link>
               </div> :
@@ -74,7 +74,8 @@ class AllCharacters extends React.Component {
               </div>
             }
             <br />
-            </div>)
+            </div>) :
+            <div>No character like that exists... yet! Would you like to create one?</div>
           }
       </div>
     )
@@ -83,7 +84,7 @@ class AllCharacters extends React.Component {
 
 const mapState = (state) => {
   return {
-    characters: state.characters
+    characters: state.characters.filter(character => !character.userId || (character.userId && character.campaignId)),
   }
 }
 
