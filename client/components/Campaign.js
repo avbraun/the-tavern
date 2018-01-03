@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link } from 'react-router-dom'
-import {updateCharacter} from '../store'
+import {updateCharacter, fetchCharacters} from '../store'
 import history from '../history'
 
 class Campaign extends React.Component {
@@ -15,10 +15,6 @@ class Campaign extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
   }
-
-  // componentDidMount() {
-  //   this.props.
-  // }
 
   render() {
     const {campaign, campaignCharacters, availableCharacters, userCharacters, joinCampaign, user } = this.props
@@ -91,18 +87,12 @@ class Campaign extends React.Component {
   }
 
   handleUpdate (event) {
-    console.log('prev state: ', this.state)
     this.setState({ [event.target.name]: event.target.value })
-    console.log('state: ', this.state)
-    console.log('event.target.value: ', event.target.value)
-    console.log('event target name: ', event.target.name)
   }
 
   handleSubmit (event) {
-    console.log('submit state: ', this.state)
     event.preventDefault();
     this.props.joinCampaign(this.state);
-    // history.replace(`/campaigns/${this.state.campaignId}`)
     history.push('/campaigns/all')
   }
 }
@@ -123,8 +113,10 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch) => {
   return {
     joinCampaign(joinObj){
-      console.log('characterObj: ', joinObj)
       dispatch(updateCharacter(joinObj))
+        .then(() => {
+          dispatch(fetchCharacters())
+        })
     }
   }
 }

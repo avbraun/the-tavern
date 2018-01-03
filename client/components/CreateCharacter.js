@@ -11,7 +11,8 @@ class CreateCharacter extends React.Component {
       name: '',
       species: '',
       alignment: '',
-      description: ''
+      description: '',
+      userId: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -53,6 +54,9 @@ class CreateCharacter extends React.Component {
           Description:
           <input type="text" name="description" />
         </label>
+        <br />
+        <input type="checkbox" name="userId" />
+          Make this character accessible to all players.
         <br />
         <br />
         <input type="submit" value="Submit" />
