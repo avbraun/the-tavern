@@ -23,6 +23,9 @@ class AllCampaigns extends React.Component {
       <div>
         <img src="http://dnd.wizards.com/sites/default/files/media/styles/news_banner_header/public/default_images/_Header_Article_Template.jpg?itok=0V79tvNJ" />
         <h3>Explore Campaigns</h3>
+        <button><Link to="/campaigns/new">Create Your Own</Link></button>
+        <br />
+        <br />
         Search:
         <input
           type="text"

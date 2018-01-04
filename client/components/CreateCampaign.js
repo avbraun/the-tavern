@@ -11,7 +11,7 @@ class CreateCampaign extends React.Component {
       name: '',
       version: '',
       type: '',
-      dm: '',
+      dm: props.user.fullName,
       description: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -52,11 +52,6 @@ class CreateCampaign extends React.Component {
         </label>
         <br />
         <label>
-          Dungeon Master:
-          <input type="text" name="dm" />
-        </label>
-        <br />
-        <label>
           Description:
           <input type="text" name="description" />
         </label>
@@ -70,7 +65,6 @@ class CreateCampaign extends React.Component {
 
   handleUpdate (event) {
     this.setState({ [event.target.name]: event.target.value })
-    console.log('state: ', this.state)
   }
 
   handleSubmit (event) {
@@ -80,12 +74,9 @@ class CreateCampaign extends React.Component {
   }
 }
 
-const mapState = (state, ownProps) => {
-  // const campaignId = Number(ownProps.match.params.campaignId)
-
+const mapState = (state) => {
   return {
-  //   campaign: state.campaigns.find(campaign => campaign.id === campaignId),
-  //   characters: state.characters.filter(character => character.campaignId === campaignId)
+    user: state.user
   }
 }
 

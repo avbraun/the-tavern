@@ -66,12 +66,10 @@ class EditCharacter extends React.Component {
 
   handleUpdate (event) {
     this.setState({ [event.target.name]: event.target.value })
-    console.log('this.state: ', this.state)
   }
 
   handleSubmit (event) {
     event.preventDefault();
-    console.log('this.state: ', this.state)
     this.props.updateCharacter(this.state);
     history.push(`/account/user/${this.props.user.id}`)
   }

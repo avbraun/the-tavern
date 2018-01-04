@@ -36,14 +36,13 @@ class Campaign extends React.Component {
       Group loot: {campaign.groupLoot}
       <br />
       Players:
-      <br />
       <ul>
         {
           campaignCharacters.length > 0 ?
             campaignCharacters.map(character => {
               return (
                 <div>
-                  <li>{character.user.fullName || ''} as {character.name || ''}</li>
+                  <li><Link to={`/users/${character.user.id}`}>{character.user.fullName || ''}</Link> as <Link to={`/characters/${character.id}`}>{character.name || ''}</Link></li>
                 </div>
               )
             }) : <div>

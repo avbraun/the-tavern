@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {postCharacter} from '../store'
 import history from '../history'
 
@@ -71,17 +71,15 @@ class CreateCharacter extends React.Component {
 
   handleUpdate (event) {
     this.setState({ [event.target.name]: event.target.value })
-    console.log('state: ', this.state)
   }
 
   handleSubmit (event) {
     event.preventDefault();
     this.props.createCharacter(this.state)
     history.push(`/users/${this.props.user.id}`)
-    // console.log('this.state: ', this.state)
   }
 
-  handleCheckbox (event) {
+  handleCheckbox () {
     this.setState({ userId: this.props.user.id })
   }
 }
@@ -95,7 +93,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     createCharacter (character) {
-      console.log('character-dispatch: ', character)
       dispatch(postCharacter(character))
     }
   }
