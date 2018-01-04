@@ -9,7 +9,8 @@ const Character = (props) => {
   return (
     <div>
     <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/hero_dmgscreen_0.jpg?itok=Iy7FLffb" />
-    <h3>Character Profile: {character.name || 'Unnamed character'}</h3>
+    <br />
+    <h3 id="char-header-text">Character Profile: {character.name || 'Unnamed character'}</h3>
     NAME<br />
     {character.name || ''}<br />
     <br />

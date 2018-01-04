@@ -39,7 +39,7 @@ export const postCharacter = character =>
 
 export const updateCharacter = updateObj =>
   dispatch =>
-    axios.put('/api/characters/update', updateObj)
+    axios.put('/api/characters/update/', updateObj)
       .then(res => {
         dispatch(editCharacter(res.data))
       })

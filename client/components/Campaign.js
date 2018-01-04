@@ -14,11 +14,10 @@ class Campaign extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
   }
 
   render() {
-    const {campaign, campaignCharacters, availableCharacters, userCharacters, user, isOnCampaign, deleteCampaign } = this.props
+    const {campaign, campaignCharacters, availableCharacters, userCharacters, user, userCampaignCharacter, deleteCampaign, leaveCampaign } = this.props
 
     return (
     <div>
@@ -52,8 +51,7 @@ class Campaign extends React.Component {
         }
       </ul>
       {
-        isOnCampaign || campaign.dm === user.fullName ?
-          <div /> :
+        !userCampaignCharacter && campaign.dm !== user.fullName ?
           <div id="join-campaign-container">
             Would you like to join this campaign? Select from one of the public characters below, or create your own!
             <br />
@@ -83,7 +81,13 @@ class Campaign extends React.Component {
               <button><Link to={`/characters/new/${campaign.id}`}>Create Your Own</Link></button>
               </div>
             </div>
-          </div>
+          </div> :
+          <div />
+      }
+      {
+        userCampaignCharacter ?
+        <button onClick={() => leaveCampaign(userCampaignCharacter)}>Leave Campaign</button> :
+        <div />
       }
       {
         campaign.dm === user.fullName ?
@@ -106,11 +110,6 @@ class Campaign extends React.Component {
     this.props.joinCampaign(this.state);
     history.push('/campaigns/all')
   }
-
-  handleDelete () {
-    this.props.deleteCampaign(this.state);
-    // history.push('/campaigns/all')
-  }
 }
 
 
@@ -123,7 +122,7 @@ const mapState = (state, ownProps) => {
     campaignCharacters: state.characters.filter(character => character.campaignId === campaignId),
     availableCharacters: state.characters.filter(character => !character.userId),
     userCharacters: state.characters.filter(character => character.userId === state.user.id && !character.campaignId),
-    isOnCampaign: state.characters.filter(character => character.userId === state.user.id && character.campaignId === campaignId).length ? true : false
+    userCampaignCharacter: state.characters.find(character => character.userId === state.user.id && character.campaignId === campaignId)
   }
 }
 
@@ -136,10 +135,12 @@ const mapDispatch = (dispatch, ownProps) => {
         .then(() => history.push(`/campaigns/${joinObj.campaignId}`))
     },
     deleteCampaign(user, campaign){
-      console.log('campaign.Id: ', campaign.id)
-      console.log('user.id: ', user.id)
       history.push(`/account/user/${user.id}`)
       dispatch(removeCampaign(campaign))
+    },
+    leaveCampaign(userCharacter){
+      history.push(`/account/user/${userCharacter.userId}`)
+      dispatch(updateCharacter({ id: userCharacter.id, campaignId: null }))
     }
   }
 }
