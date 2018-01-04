@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
+import {removeCharacter} from '../store'
+import history from '../history'
 
 const Character = (props) => {
-  const { character, user } = props
+  const { character, user, deleteCharacter } = props
   return (
     <div>
     <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/hero_dmgscreen_0.jpg?itok=Iy7FLffb" />
@@ -30,7 +32,10 @@ const Character = (props) => {
     <br />
     {
       character.userId === user.id ?
-      <button><Link to={`/characters/${character.id}/edit`}>Edit</Link></button> :
+      <div>
+      <button><Link to={`/characters/${character.id}/edit`}>Edit</Link></button>
+      <button onClick={() => deleteCharacter(user)}>Delete</button>
+      </div> :
       <div />
     }
     </div>
@@ -46,4 +51,14 @@ let characterId = Number(ownProps.match.params.characterId);
   }
 }
 
-export default withRouter(connect(mapState)(Character))
+const mapDispatch = (dispatch, ownProps) => {
+let characterId = Number(ownProps.match.params.characterId);
+  return {
+    deleteCharacter(user){
+      history.push(`/account/user/${user.id}`)
+      dispatch(removeCharacter(characterId))
+    }
+  }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(Character))

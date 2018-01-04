@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import history from '../history'
@@ -32,7 +31,7 @@ export const AccountPage = (props) => {
           userCharacters.map(filteredCharacter =>
           <div>
            <Link to={`/campaigns/${filteredCharacter.campaignId}`}>
-           {filteredCharacter.campaign.name}</Link>   ({filteredCharacter.name} the {filteredCharacter.species}, {filteredCharacter.alignment})
+           {filteredCharacter.campaign.name}</Link>   (<Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.species}, {filteredCharacter.alignment})
           </div>
         )
         : <div>
@@ -48,7 +47,7 @@ export const AccountPage = (props) => {
           </div>
         )
         : <div>
-        You are not currently on any campaigns.
+        You do not currently have any saved characters. Would you like to <Link to="/characters/new">create one</Link>?
         </div>
       }
     <br />

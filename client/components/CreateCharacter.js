@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {postCharacter} from '../store'
+import {postCharacter, fetchCharacters, fetchCampaigns} from '../store'
 import history from '../history'
 
 class CreateCharacter extends React.Component {
@@ -12,7 +12,8 @@ class CreateCharacter extends React.Component {
       species: '',
       alignment: '',
       description: '',
-      userId: null
+      userId: props.match.params.campaignId ? Number(props.user.id) : null,
+      campaignId: null || Number(props.match.params.campaignId)
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -23,9 +24,12 @@ class CreateCharacter extends React.Component {
     return (
       <div>
       <img src="http://dnd.wizards.com/sites/default/files/media/styles/story_banner/public/images/head-banner/hero_dmgscreen_0.jpg?itok=Iy7FLffb" />
-      <h2>Create a New Character</h2>
-      Dream up a character to add to the public database, or save for your own private use!
-      <br />
+      <h3>Create a New Character</h3>
+      {
+        this.state.campaignId ?
+        <div>Make a character to join {`${this.props.selectedCampaign.name}`}!</div> :
+        <div>Dream up a character to add to the public database, or save for your own private use!</div>
+      }
       <br />
       <form onSubmit={this.handleSubmit} onChange={this.handleUpdate}>
         <label>
@@ -58,10 +62,14 @@ class CreateCharacter extends React.Component {
           Description:
           <input type="text" name="description" />
         </label>
-        <br />
-        <input type="checkbox" name="userId" value={this.props.user.id} onClick={this.handleChange} />
-          Save to my personal character list.
-        <br />
+        {
+          this.state.campaignId ?
+          <div /> :
+          <div>
+          <input type="checkbox" name="userId" value={this.props.user.id} onClick={this.handleChange} />
+            Save to my personal character list.
+          </div>
+        }
         <br />
         <input type="submit" value="Submit" />
       </form>
@@ -71,12 +79,12 @@ class CreateCharacter extends React.Component {
 
   handleUpdate (event) {
     this.setState({ [event.target.name]: event.target.value })
+    console.log('this.state: ', this.state)
   }
 
   handleSubmit (event) {
     event.preventDefault();
     this.props.createCharacter(this.state)
-    history.push(`/users/${this.props.user.id}`)
   }
 
   handleCheckbox () {
@@ -84,16 +92,20 @@ class CreateCharacter extends React.Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = (state, ownProps) => {
   return {
-    user: state.user
+    user: state.user,
+    selectedCampaign: state.campaigns.find(campaign => campaign.id === Number(ownProps.match.params.campaignId))
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     createCharacter (character) {
       dispatch(postCharacter(character))
+        .then(() => dispatch(fetchCharacters()))
+        .then(() => dispatch(fetchCampaigns()))
+        .then(() => ownProps.history.push(`/account/user/${character.userId}`))
     }
   }
 }

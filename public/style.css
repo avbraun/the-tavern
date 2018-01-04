@@ -86,7 +86,7 @@ form div {
 button {
   background-color: white;
   color: black;
-  padding: 10px;
+  padding: 5px;
   font-size: 14px;
   justify-content: space-between;
 }
@@ -124,8 +124,17 @@ img {
   width: 720px;
 }
 
-
-#player-notes {
-  height: 200px;
-  width: 500px;
+#join-campaign-container {
+  background-color: goldenrod;
+  padding: 10px;
 }
+
+#select-char {
+  display: flex;
+  justify-content: space-around;
+}
+
+#public-char, #saved-char, #create-char {
+  display: inline-block;
+}
+

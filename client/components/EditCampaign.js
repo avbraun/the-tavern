@@ -100,10 +100,9 @@ const mapDispatch = (dispatch) => {
   return {
     updateCampaign(campaign){
       dispatch(updateCampaign(campaign))
-        .then(() => {
-          dispatch(fetchCharacters())
-          dispatch(fetchCampaigns())
-        })
+        .then(() => dispatch(fetchCharacters()))
+        .then(() => dispatch(fetchCampaigns()))
+        .then(() => history.push(`/campaigns/${campaign.id}`))
     }
   }
 }

@@ -38,6 +38,7 @@ class Routes extends Component {
                   <Route exact path="/users/all" component={AllUsers} />
                   <Route exact path="/users/:userId" render={(props) => <ProfilePage id={props.match.params.userId} />} />
                   <Route exact path="/users/:userId/edit" component={EditProfile} />
+                  <Route exact path="/characters/new/:campaignId" component={CreateCharacter} />
                   <Route exact path="/characters/new" component={CreateCharacter} />
                   <Route exact path="/characters/all" component={AllCharacters} />
                   <Route exact path="/characters/:characterId" component={Character} />

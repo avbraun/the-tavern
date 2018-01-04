@@ -37,9 +37,9 @@ class AllCampaigns extends React.Component {
         {
           filteredCampaigns.map(campaign =>
             <div>
-            Name: <Link to={`/campaigns/${campaign.id}`}>{campaign.name}</Link><br />
+            NAME: <Link to={`/campaigns/${campaign.id}`}>{campaign.name}</Link><br />
             DM: {campaign.dm} <br />
-            Description: {campaign.description}<br />
+            DESCRIPTION: {campaign.description}<br />
             <br />
             </div>)
           }

@@ -7,6 +7,7 @@ import history from '../history'
 const GET_CAMPAIGNS = 'GET_CAMPAIGNS'
 const ADD_CAMPAIGN = 'ADD_CAMPAIGN'
 const EDIT_CAMPAIGN = 'EDIT_CAMPAIGN'
+const REMOVE_CAMPAIGN = 'REMOVE_CAMPAIGN'
 
 /**
  * ACTION CREATORS
@@ -14,6 +15,7 @@ const EDIT_CAMPAIGN = 'EDIT_CAMPAIGN'
 const getCampaigns = campaigns => ({ type: GET_CAMPAIGNS, campaigns })
 const addCampaign = campaign => ({ type: ADD_CAMPAIGN, campaign })
 const editCampaign = campaign => ({ type: EDIT_CAMPAIGN, campaign })
+const removeCampaign = campaign => ({ type: REMOVE_CAMPAIGN, campaign })
 
 /**
  * THUNK CREATORS
@@ -42,6 +44,14 @@ export const updateCampaign = campaign =>
       })
       .catch(err => console.log(err))
 
+export const deleteCampaign = campaign =>
+  dispatch =>
+    axios.delete(`/api/campaigns/${campaign.id}/delete`)
+      .then(res => {
+        dispatch(removeCampaign(res.data))
+      })
+      .catch(err => console.log(err))
+
 /**
  * REDUCER
  */
@@ -55,6 +65,11 @@ export default function (state = [], action) {
       let newState = [...state];
       let campaignIndex = newState.findIndex(singleCampaign => singleCampaign.id === action.campaign.id);
       newState[campaignIndex] = action.campaign;
+      return newState;
+    case REMOVE_CAMPAIGN:
+      let currentState = [...state];
+      let campIndex = newState.findIndex(campaign => campaign.id === action.campaign.id);
+      currentState = newState.slice(0, campIndex - 1).concat(newState.slice(campIndex))
       return newState;
     default:
       return state

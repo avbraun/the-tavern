@@ -61,16 +61,16 @@ class AllCharacters extends React.Component {
           filteredCharacters.length ?
           filteredCharacters.map(character =>
             <div>
-            Name: <Link to={`/characters/${character.id}`}>{character.name}</Link><br />
-            Species: {character.species}<br />
-            Alignment: {character.alignment}<br />
+            NAME: <Link to={`/characters/${character.id}`}>{character.name}</Link><br />
+            SPECIES: {character.species}<br />
+            ALIGNMENT: {character.alignment}<br />
             {
               character.campaignId ?
               <div>
-              Current Campaign: <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link>
+              CURRENT CAMPAIGN: <Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link>
               </div> :
               <div>
-              Current Campaign: n/a
+              CURRENT CAMPAIGN: n/a
               </div>
             }
             <br />

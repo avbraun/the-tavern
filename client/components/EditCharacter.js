@@ -71,7 +71,6 @@ class EditCharacter extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     this.props.updateCharacter(this.state);
-    history.push(`/account/user/${this.props.user.id}`)
   }
 }
 
@@ -89,10 +88,9 @@ const mapDispatch = (dispatch) => {
   return {
     updateCharacter(character){
       dispatch(updateCharacter(character))
-        .then(() => {
-          dispatch(fetchCharacters())
-          dispatch(fetchCampaigns())
-        })
+        .then(() => dispatch(fetchCharacters()))
+        .then(() => dispatch(fetchCampaigns()))
+        .then(() => history.push(`/characters/${character.id}`))
     }
   }
 }

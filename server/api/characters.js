@@ -33,3 +33,14 @@ router.put('/update', (req, res, next) => {
     })
     .catch(next)
 })
+
+router.delete('/:characterId/delete', (req, res, next) => {
+  let characterId = Number(req.params.characterId)
+  Character.destroy({
+    where: { id: characterId}
+  })
+    .then(() => {
+      res.status(204).send()
+    })
+    .catch(next)
+})

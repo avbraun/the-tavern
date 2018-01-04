@@ -41,3 +41,13 @@ router.put('/update', (req, res, next) => {
     })
     .catch(next)
 })
+
+router.delete('/:campaignId/delete', (req, res, next) => {
+  Campaign.destroy({
+    where: { id: req.params.campaignId }
+  })
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch(next)
+})

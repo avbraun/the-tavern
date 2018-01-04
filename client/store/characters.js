@@ -7,6 +7,7 @@ import history from '../history'
 const GET_CHARACTERS = 'GET_CHARACTERS'
 const ADD_CHARACTER = 'ADD_CHARACTER'
 const EDIT_CHARACTER = 'EDIT_CHARACTER'
+const DELETE_CHARACTER = 'DELETE_CHARACTER'
 
 /**
  * ACTION CREATORS
@@ -14,6 +15,7 @@ const EDIT_CHARACTER = 'EDIT_CHARACTER'
 const getCharacters = characters => ({ type: GET_CHARACTERS, characters })
 const addCharacter = character => ({ type: ADD_CHARACTER, character })
 const editCharacter = character => ({ type: EDIT_CHARACTER, character })
+const deleteCharacter = character => ({ type: DELETE_CHARACTER, character })
 
 /**
  * THUNK CREATORS
@@ -43,6 +45,13 @@ export const updateCharacter = updateObj =>
       })
       .catch(err => console.log(err))
 
+export const removeCharacter = characterId =>
+  dispatch =>
+    axios.delete(`/api/characters/${characterId}/delete`)
+      .then(() => dispatch(deleteCharacter(characterId)))
+      // .then(() => history.push())
+      .catch(err => console.log(err))
+
 /**
  * REDUCER
  */
@@ -57,6 +66,15 @@ export default function (state = [], action) {
       let characterIndex = state.findIndex(character => character.id === action.character.id);
       newState[characterIndex] = action.character;
       return newState;
+
+    case DELETE_CHARACTER:
+      let nextState = [...state];
+      let charIndex = state.findIndex(character => character.id === action.character);
+      console.log('charindex: ', charIndex)
+      // nextState = nextState.slice(0, charIndex - 1).concat(nextState.slice(charIndex))
+      console.log('splice: ', nextState.splice(charIndex, 1))
+      return nextState;
+
     default:
       return state
   }
