@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link } from 'react-router-dom'
-import {updateCharacter, fetchCharacters} from '../store'
+import {updateCharacter, fetchCharacters, removeCampaign} from '../store'
 import history from '../history'
 
 class Campaign extends React.Component {
@@ -18,7 +18,7 @@ class Campaign extends React.Component {
   }
 
   render() {
-    const {campaign, campaignCharacters, availableCharacters, userCharacters, user, isOnCampaign } = this.props
+    const {campaign, campaignCharacters, availableCharacters, userCharacters, user, isOnCampaign, deleteCampaign } = this.props
 
     return (
     <div>
@@ -89,7 +89,7 @@ class Campaign extends React.Component {
         campaign.dm === user.fullName ?
         <div>
           <button><Link to={`/campaigns/${campaign.id}/edit`}>Edit</Link></button>
-          <button><Link to={`/characters/new/${campaign.id}`}>Delete</Link></button>
+          <button onClick={() => deleteCampaign(user, campaign)}>Delete</button>
         </div> :
         <div />
       }
@@ -109,7 +109,7 @@ class Campaign extends React.Component {
 
   handleDelete () {
     this.props.deleteCampaign(this.state);
-    history.push('/campaigns/all')
+    // history.push('/campaigns/all')
   }
 }
 
@@ -127,15 +127,19 @@ const mapState = (state, ownProps) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
+  let campaignId = Number(ownProps.match.params.campaignId)
   return {
     joinCampaign(joinObj){
       dispatch(updateCharacter(joinObj))
         .then(() => dispatch(fetchCharacters()))
         .then(() => history.push(`/campaigns/${joinObj.campaignId}`))
     },
-    removeCampaign(campaign){
-      dispatch(deleteCampaign)
+    deleteCampaign(user, campaign){
+      console.log('campaign.Id: ', campaign.id)
+      console.log('user.id: ', user.id)
+      history.push(`/account/user/${user.id}`)
+      dispatch(removeCampaign(campaign))
     }
   }
 }

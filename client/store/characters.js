@@ -49,7 +49,6 @@ export const removeCharacter = characterId =>
   dispatch =>
     axios.delete(`/api/characters/${characterId}/delete`)
       .then(() => dispatch(deleteCharacter(characterId)))
-      // .then(() => history.push())
       .catch(err => console.log(err))
 
 /**
@@ -66,15 +65,11 @@ export default function (state = [], action) {
       let characterIndex = state.findIndex(character => character.id === action.character.id);
       newState[characterIndex] = action.character;
       return newState;
-
     case DELETE_CHARACTER:
       let nextState = [...state];
       let charIndex = state.findIndex(character => character.id === action.character);
-      console.log('charindex: ', charIndex)
-      // nextState = nextState.slice(0, charIndex - 1).concat(nextState.slice(charIndex))
-      console.log('splice: ', nextState.splice(charIndex, 1))
+      nextState.splice(charIndex, 1)
       return nextState;
-
     default:
       return state
   }
