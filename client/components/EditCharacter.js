@@ -11,7 +11,8 @@ class EditCharacter extends React.Component {
     this.state = {
       id: characterId,
       name: props.character.name,
-      species: props.character.species,
+      race: props.character.race,
+      charClass: props.character.charClass,
       alignment: props.character.alignment,
       description: props.character.description
     }
@@ -33,9 +34,14 @@ class EditCharacter extends React.Component {
       </label>
       <br />
       <label>
-      Species:
-        <input type="text" name="species" defaultValue={character.species} />
+      Race:
+        <input type="text" name="race" defaultValue={character.race} />
       </label>
+      <br />
+      <label>
+      Class:
+        <input type="text" name="charClass" defaultValue={character.charClass} />
+        </label>
       <br />
       <label>
       Alignment:

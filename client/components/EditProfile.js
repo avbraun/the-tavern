@@ -28,14 +28,17 @@ class EditProfile extends React.Component {
           Name:
           <input type="text" name="fullName" defaultValue={this.props.user.fullName} />
         </label>
+        <br />
         <label>
-          Bio: (TRY LARGER TEXT AREA)
+          Bio:
           <input type="text" name="bio" defaultValue={this.props.user.bio} />
         </label>
+        <br />
         <label>
           Proudest DnD Moment:
           <input type="text" name="proudestMoment" defaultValue={this.props.user.proudestMoment} />
         </label>
+        <br />
         <button onClick={this.handleSubmit}>Submit</button>
       </form>
       </div>

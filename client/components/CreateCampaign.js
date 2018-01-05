@@ -69,7 +69,7 @@ class CreateCampaign extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     this.props.createCampaign(this.state)
-    history.push(`/account/user/${this.props.user.id}`)
+    history.push('/account/user')
   }
 }
 

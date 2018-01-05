@@ -20,9 +20,9 @@ class AllCharacters extends React.Component {
   render () {
     // Determines use of matchSorter based on whether the search field and/or alignment filter is used
     let filteredCharacters;
-    let search = matchSorter(this.props.characters, this.state.search, { keys: ['name', 'species', 'description'] });
+    let search = matchSorter(this.props.characters, this.state.search, { keys: ['name', 'race', 'charClass', 'description'] });
     let alignment = matchSorter(this.props.characters, this.state.alignmentSearch, { keys: ['alignment'] });
-    let both = matchSorter(alignment, this.state.search, { keys: [ 'name', 'species', 'description' ] });
+    let both = matchSorter(alignment, this.state.search, { keys: [ 'name', 'race', 'charClass', 'description' ] });
 
     if (this.state.search && this.state.alignmentSearch) filteredCharacters = both;
     else if (this.state.search) filteredCharacters = search;
@@ -62,7 +62,8 @@ class AllCharacters extends React.Component {
           filteredCharacters.map(character =>
             <div key={`filtered-char-${character.id}`}>
             NAME: <Link to={`/characters/${character.id}`}>{character.name}</Link><br />
-            SPECIES: {character.species}<br />
+            RACE: {character.race}<br />
+            CLASS: {character.charClass}<br />
             ALIGNMENT: {character.alignment}<br />
             {
               character.campaignId ?

@@ -30,7 +30,7 @@ export const AccountPage = (props) => {
           userCharacters.map(filteredCharacter =>
           <div key={`campaign-player-${filteredCharacter.id}`}>
            <Link to={`/campaigns/${filteredCharacter.campaignId}`}>
-           {filteredCharacter.campaign.name}</Link>   (<Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.species}, {filteredCharacter.alignment})
+           {filteredCharacter.campaign.name}</Link>   (<Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.race} {filteredCharacter.charClass}, {filteredCharacter.alignment})
           </div>
         )
         : <div>
@@ -42,7 +42,7 @@ export const AccountPage = (props) => {
         savedCharacters.length ?
           savedCharacters.map(filteredCharacter =>
           <div key={`saved-chars-${filteredCharacter.id}`}>
-           <Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.species} ({filteredCharacter.alignment})
+           <Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.race} {filteredCharacter.charClass} ({filteredCharacter.alignment})
           </div>
         )
         : <div>

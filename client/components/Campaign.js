@@ -23,19 +23,25 @@ class Campaign extends React.Component {
     <div>
     <img src="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/07_NewtoDnD_Hero_Locations.jpg?itok=SxzyekpZ" />
       <h3>{campaign.name}</h3>
-      Version: {campaign.version}
+      VERSION<br />
+      {campaign.version}<br />
       <br />
-      Type: {campaign.type}
+      TYPE<br />
+      {campaign.type}<br />
       <br />
-      DM: {campaign.dm}
+      DM<br />
+      {campaign.dm}<br />
       <br />
-      Description: {campaign.description}
+      DESCRIPTION<br />
+      {campaign.description}<br />
       <br />
-      When last we left our heroes... {campaign.whenLast}
+      WHEN LAST WE LEFT OUR HEROES<br />
+      {campaign.whenLast}<br />
       <br />
-      Group loot: {campaign.groupLoot}
+      GROUP LOOT<br />
+      {campaign.groupLoot}<br />
       <br />
-      Players:
+      PLAYERS<br />
       <ul>
         {
           campaignCharacters.length > 0 ?
@@ -62,7 +68,7 @@ class Campaign extends React.Component {
                   <option>Select a public character</option>
                   {
                     availableCharacters.map(character =>
-                      <option key={character.id} value={character.id}>{character.name} ({character.species}, {character.alignment})</option>)
+                      <option key={character.id} value={character.id}>{character.name} ({character.race} {character.charClass}, {character.alignment})</option>)
                   }
                 </select>
                 <button onClick={this.handleSubmit}>Join</button>
@@ -72,7 +78,7 @@ class Campaign extends React.Component {
                   <option>Select one of your saved characters</option>
                   {
                     userCharacters.map(character =>
-                      <option key={character.id} value={character.id}>{character.name} ({character.species}, {character.alignment})</option>)
+                      <option key={character.id} value={character.id}>{character.name} ({character.race} {character.charClass}, {character.alignment})</option>)
                   }
                 </select>
                 <button onClick={this.handleSubmit}>Join</button>
@@ -134,11 +140,11 @@ const mapDispatch = (dispatch) => {
         .then(() => history.push(`/campaigns/${joinObj.campaignId}`))
     },
     deleteCampaign(user, campaign){
-      history.push(`/account/user/${user.id}`)
+      history.push('/account/user')
       dispatch(removeCampaign(campaign))
     },
     leaveCampaign(userCharacter){
-      history.push(`/account/user/${userCharacter.userId}`)
+      history.push('/account/user')
       dispatch(updateCharacter({ id: userCharacter.id, campaignId: null }))
     }
   }

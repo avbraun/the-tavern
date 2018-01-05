@@ -31,7 +31,7 @@ class Routes extends Component {
                   <Route exact path="/" component={UserHome} />
                   <Route exact path="/home" component={UserHome} />
                   <Route exact path="/campaigns/all" component={AllCampaigns} />
-                  <Route exact path="/account/user/:campaignId" component={AccountPage} />
+                  <Route exact path="/account/user" component={AccountPage} />
                   <Route exact path="/campaigns/new" component={CreateCampaign} />
                   <Route exact path="/campaigns/:campaignId" component={Campaign} />
                   <Route exact path="/campaigns/:campaignId/edit" component={EditCampaign} />

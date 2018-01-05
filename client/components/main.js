@@ -24,7 +24,7 @@ class Main extends React.Component {
             ? <div className="nav-bar">
               {/* The navbar will show these links after you log in */}
               <NavLink className="home" to="/home" onClick={getCampaignsUsersAndChars}>Home</NavLink>
-              <NavLink className="my-account" to={`/account/user/${currentUser.id}`}>My Account</NavLink>
+              <NavLink className="my-account" to="/account/user">My Account</NavLink>
               <NavLink className="my-profile" to={`/users/${currentUser.id}`}>My Profile</NavLink>
               <NavLink className="users" to="/users/all">Users</NavLink>
               <NavLink className="characters" to="/characters/all">Characters</NavLink>

@@ -17,7 +17,7 @@ class AllCampaigns extends React.Component {
   }
 
   render() {
-    let filteredCampaigns = matchSorter(this.props.campaigns, this.state.search, { keys: ['name'] });
+    let filteredCampaigns = matchSorter(this.props.campaigns, this.state.search, { keys: ['name', 'dm'] });
 
     return (
       <div>

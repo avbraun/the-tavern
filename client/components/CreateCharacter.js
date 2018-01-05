@@ -9,11 +9,12 @@ class CreateCharacter extends React.Component {
     super(props);
     this.state = {
       name: '',
-      species: '',
+      race: '',
+      charClass: '',
       alignment: '',
       description: '',
       userId: props.match.params.campaignId ? Number(props.user.id) : null,
-      campaignId: null || Number(props.match.params.campaignId)
+      campaignId: props.match.params.campaignId ? Number(props.match.params.campaignId) : null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -37,8 +38,13 @@ class CreateCharacter extends React.Component {
         </label>
         <br />
         <label>
-          Species:
-          <input type="text" name="species" />
+          Race:
+          <input type="text" name="race" />
+        </label>
+        <br />
+        <label>
+          Class:
+          <input type="text" name="charClass" />
         </label>
         <br />
         <label>
@@ -78,6 +84,7 @@ class CreateCharacter extends React.Component {
 
   handleUpdate (event) {
     this.setState({ [event.target.name]: event.target.value })
+    console.log('this.state: ', this.state)
   }
 
   handleSubmit (event) {
@@ -99,7 +106,7 @@ const mapDispatch = (dispatch, ownProps) => {
       dispatch(postCharacter(character))
         .then(() => dispatch(fetchCharacters()))
         .then(() => dispatch(fetchCampaigns()))
-        .then(() => ownProps.history.push(`/account/user/${character.userId}`))
+        .then(() => ownProps.history.push(`/account/user`))
     }
   }
 }

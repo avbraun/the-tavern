@@ -30,7 +30,7 @@ const ProfilePage = (props) => {
     {
       characters.map(character =>
         <div key={`user-camps-${character.campaign.id}`}>
-        <li><Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link> as <Link to={`/characters/${character.id}`}>{character.name}</Link> ({character.species}, {character.alignment})</li>
+        <li><Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link> as <Link to={`/characters/${character.id}`}>{character.name}</Link> ({character.race} {character.charClass}, {character.alignment})</li>
         </div>
       )
     }

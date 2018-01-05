@@ -14,8 +14,11 @@ const Character = (props) => {
     NAME<br />
     {character.name || ''}<br />
     <br />
-    SPECIES<br />
-    {character.species || ''}<br />
+    RACE<br />
+    {character.race || ''}<br />
+    <br />
+    CLASS<br />
+    {character.charClass || ''}<br />
     <br />
     ALIGNMENT<br />
     {character.alignment || ''}<br />
@@ -56,7 +59,7 @@ const mapDispatch = (dispatch, ownProps) => {
 let characterId = Number(ownProps.match.params.characterId);
   return {
     deleteCharacter(user){
-      history.push(`/account/user/${user.id}`)
+      history.push('/account/user')
       dispatch(removeCharacter(characterId))
     }
   }

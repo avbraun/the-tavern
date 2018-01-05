@@ -15,6 +15,7 @@ router.get('/all', (req, res, next) => {
 router.post('/new', (req, res, next) => {
   Character.create(req.body)
     .then(newCharacter => {
+      console.log('newCharacter: ', newCharacter)
       res.json(newCharacter)
     })
     .catch(next)
