@@ -33,7 +33,7 @@ class AllUsers extends React.Component {
         <br />
         {
           filteredUsers.map(singleUser =>
-            <div>
+            <div key={`filtered-user-${singleUser.id}`}>
             <Link
               key={singleUser.id}
               to={`/users/${singleUser.id}`}>

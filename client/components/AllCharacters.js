@@ -60,7 +60,7 @@ class AllCharacters extends React.Component {
         {
           filteredCharacters.length ?
           filteredCharacters.map(character =>
-            <div>
+            <div key={`filtered-char-${character.id}`}>
             NAME: <Link to={`/characters/${character.id}`}>{character.name}</Link><br />
             SPECIES: {character.species}<br />
             ALIGNMENT: {character.alignment}<br />

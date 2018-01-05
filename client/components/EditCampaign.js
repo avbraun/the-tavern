@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Link } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {updateCampaign, fetchCharacters, fetchCampaigns} from '../store'
 import history from '../history'
 

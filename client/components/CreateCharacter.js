@@ -17,7 +17,6 @@ class CreateCharacter extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
-    this.handleCheckbox = this.handleCheckbox.bind(this)
   }
 
   render () {
@@ -66,7 +65,7 @@ class CreateCharacter extends React.Component {
           this.state.campaignId ?
           <div /> :
           <div>
-          <input type="checkbox" name="userId" value={this.props.user.id} onClick={this.handleChange} />
+          <input type="checkbox" name="userId" value={this.props.user.id} />
             Save to my personal character list.
           </div>
         }
@@ -79,16 +78,11 @@ class CreateCharacter extends React.Component {
 
   handleUpdate (event) {
     this.setState({ [event.target.name]: event.target.value })
-    console.log('this.state: ', this.state)
   }
 
   handleSubmit (event) {
     event.preventDefault();
     this.props.createCharacter(this.state)
-  }
-
-  handleCheckbox () {
-    this.setState({ userId: this.props.user.id })
   }
 }
 

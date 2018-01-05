@@ -1,14 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {NavLink, Link} from 'react-router-dom'
 import history from '../history'
 
 /**
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const {user, campaigns, createACharacter, startCampaign, joinCampaign, continueCampaign} = props
+  const {user, createACharacter, startCampaign, joinCampaign, continueCampaign} = props
   return (
     <div className="user-home-welcome">
       <div className="container">
@@ -46,7 +44,7 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = () => {
   return {
     createACharacter(){
       history.push('/characters/new')

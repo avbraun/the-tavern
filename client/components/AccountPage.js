@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import history from '../history'
 
 /**
  * COMPONENT
@@ -16,7 +15,7 @@ export const AccountPage = (props) => {
       {
         userDmCampaigns.length ?
           userDmCampaigns.map(campaign =>
-          <div>
+          <div key={`campaign-dm-${campaign.id}`}>
            <Link to={`/campaigns/${campaign.id}`}>
            {campaign.name}</Link>
           </div>
@@ -29,7 +28,7 @@ export const AccountPage = (props) => {
       {
         userCharacters.length ?
           userCharacters.map(filteredCharacter =>
-          <div>
+          <div key={`campaign-player-${filteredCharacter.id}`}>
            <Link to={`/campaigns/${filteredCharacter.campaignId}`}>
            {filteredCharacter.campaign.name}</Link>   (<Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.species}, {filteredCharacter.alignment})
           </div>
@@ -42,7 +41,7 @@ export const AccountPage = (props) => {
       {
         savedCharacters.length ?
           savedCharacters.map(filteredCharacter =>
-          <div>
+          <div key={`saved-chars-${filteredCharacter.id}`}>
            <Link to={`/characters/${filteredCharacter.id}`}>{filteredCharacter.name}</Link> the {filteredCharacter.species} ({filteredCharacter.alignment})
           </div>
         )
@@ -54,8 +53,8 @@ export const AccountPage = (props) => {
     Eager for more adventure? Join a campaign or create one of your own!
     <br />
     <br />
-    <button onClick={createCampaign}>Create Campaign</button>
-    <button onClick={joinCampaign}>Join Campaign</button>
+    <button><Link to="/campaigns/new">Create Campaign</Link></button>
+    <button><Link to="/campaigns/all">Join Campaign</Link></button>
     </div>
   )
 }
@@ -73,15 +72,4 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    createCampaign () {
-      history.push('/campaigns/new')
-    },
-    joinCampaign () {
-      history.push('/campaigns/all')
-    }
-  }
-}
-
-export default connect(mapState, mapDispatch)(AccountPage)
+export default connect(mapState)(AccountPage)

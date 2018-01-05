@@ -41,7 +41,7 @@ class Campaign extends React.Component {
           campaignCharacters.length > 0 ?
             campaignCharacters.map(character => {
               return (
-                <div>
+                <div key={`player-${character.id}`}>
                   <li><Link to={`/users/${character.user.id}`}>{character.user.fullName || ''}</Link> as <Link to={`/characters/${character.id}`}>{character.name || ''}</Link></li>
                 </div>
               )
@@ -62,7 +62,7 @@ class Campaign extends React.Component {
                   <option>Select a public character</option>
                   {
                     availableCharacters.map(character =>
-                      <option value={character.id}>{character.name} ({character.species}, {character.alignment})</option>)
+                      <option key={character.id} value={character.id}>{character.name} ({character.species}, {character.alignment})</option>)
                   }
                 </select>
                 <button onClick={this.handleSubmit}>Join</button>
@@ -72,7 +72,7 @@ class Campaign extends React.Component {
                   <option>Select one of your saved characters</option>
                   {
                     userCharacters.map(character =>
-                      <option value={character.id}>{character.name} ({character.species}, {character.alignment})</option>)
+                      <option key={character.id} value={character.id}>{character.name} ({character.species}, {character.alignment})</option>)
                   }
                 </select>
                 <button onClick={this.handleSubmit}>Join</button>
@@ -126,8 +126,7 @@ const mapState = (state, ownProps) => {
   }
 }
 
-const mapDispatch = (dispatch, ownProps) => {
-  let campaignId = Number(ownProps.match.params.campaignId)
+const mapDispatch = (dispatch) => {
   return {
     joinCampaign(joinObj){
       dispatch(updateCharacter(joinObj))

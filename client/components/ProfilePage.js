@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 
 const ProfilePage = (props) => {
-  const { profileUser, characters, user, editProfile } = props
+  const { profileUser, characters, user } = props
   const profileId = Number(props.match.params.userId)
   return (
     <div>
@@ -29,7 +29,7 @@ const ProfilePage = (props) => {
     <ul>
     {
       characters.map(character =>
-        <div>
+        <div key={`user-camps-${character.campaign.id}`}>
         <li><Link to={`/campaigns/${character.campaignId}`}>{character.campaign.name}</Link> as <Link to={`/characters/${character.id}`}>{character.name}</Link> ({character.species}, {character.alignment})</li>
         </div>
       )

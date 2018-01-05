@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {postCampaign} from '../store'
 import history from '../history'
 
@@ -21,9 +21,8 @@ class CreateCampaign extends React.Component {
   render () {
     return (
       <div>
-      Create a new campaign!
-      <br />
-      <br />
+      <img src="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/07_NewtoDnD_Hero_Locations.jpg?itok=SxzyekpZ" />
+      <h3>Create a New Campaign</h3>
       <form onSubmit={this.handleSubmit} onChange={this.handleUpdate}>
         <label>
           Name:
